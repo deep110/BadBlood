@@ -3017,18 +3017,6 @@ public class KinectManager : MonoBehaviour
 					        (joint == (int)KinectInterop.JointType.WristLeft) || 
 					        (joint == (int)KinectInterop.JointType.HandLeft))
 					{
-//						if(joint == (int)KinectInterop.JointType.WristLeft)
-//						{
-//							KinectInterop.JointData handData = bodyData.joint[(int)KinectInterop.JointType.HandLeft];
-//							KinectInterop.JointData handTipData = bodyData.joint[(int)KinectInterop.JointType.HandTipLeft];
-//							
-//							if(handData.trackingState != KinectInterop.TrackingState.NotTracked &&
-//							   handTipData.trackingState != KinectInterop.TrackingState.NotTracked)
-//							{
-//								jointDir = handData.direction + handTipData.direction;
-//								jointDir = new Vector3(jointDir.x, jointDir.y, -jointDir.z).normalized;
-//							}
-//						}
 						
 						KinectInterop.JointData shCenterData = bodyData.joint[(int)KinectInterop.JointType.SpineShoulder];
 						if(shCenterData.trackingState != KinectInterop.TrackingState.NotTracked &&
@@ -3073,24 +3061,6 @@ public class KinectManager : MonoBehaviour
 									fwdDir = Vector3.Cross(rightDir, upDir).normalized;
 									
 									jointData.normalRotation = Quaternion.LookRotation(fwdDir, upDir);
-									//bRotated = true;
-
-//									// fix invalid wrist rotation
-//									KinectInterop.JointData elbowData = bodyData.joint[(int)KinectInterop.JointType.ElbowLeft];
-//									if(elbowData.trackingState != KinectInterop.TrackingState.NotTracked)
-//									{
-//										Quaternion quatLocalRot = Quaternion.Inverse(elbowData.normalRotation) * jointData.normalRotation;
-//										float angleY = quatLocalRot.eulerAngles.y;
-//										
-//										if(angleY >= 90f && angleY < 270f && bodyData.leftHandOrientation != Quaternion.identity)
-//										{
-//											jointData.normalRotation = bodyData.leftHandOrientation;
-//										}
-//										
-//										bodyData.leftHandOrientation = jointData.normalRotation;
-//									}
-
-									//bRotated = true;
 								}
 							}
 
@@ -3111,18 +3081,6 @@ public class KinectManager : MonoBehaviour
 					        (joint == (int)KinectInterop.JointType.WristRight) || 
 					        (joint == (int)KinectInterop.JointType.HandRight))
 					{
-//						if(joint == (int)KinectInterop.JointType.WristRight)
-//						{
-//							KinectInterop.JointData handData = bodyData.joint[(int)KinectInterop.JointType.HandRight];
-//							KinectInterop.JointData handTipData = bodyData.joint[(int)KinectInterop.JointType.HandTipRight];
-//
-//							if(handData.trackingState != KinectInterop.TrackingState.NotTracked &&
-//							   handTipData.trackingState != KinectInterop.TrackingState.NotTracked)
-//							{
-//								jointDir = handData.direction + handTipData.direction;
-//								jointDir = new Vector3(jointDir.x, jointDir.y, -jointDir.z).normalized;
-//							}
-//						}
 
 						KinectInterop.JointData shCenterData = bodyData.joint[(int)KinectInterop.JointType.SpineShoulder];
 						if(shCenterData.trackingState != KinectInterop.TrackingState.NotTracked &&
