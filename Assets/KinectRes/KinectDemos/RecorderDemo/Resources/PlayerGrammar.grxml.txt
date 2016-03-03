@@ -1,0 +1,34 @@
+﻿<grammar version="1.0" xml:lang="en-US" root="rootRule" tag-format="semantics/1.0-literals" xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="rootRule">
+    <one-of>
+    
+      <item>
+        <tag>RECORD</tag>
+        <one-of>
+          <item> start recording </item>
+          <item> record </item>
+        </one-of>
+      </item>
+      
+      <item>
+        <tag>PLAY</tag>
+        <one-of>
+          <item> start playing </item>
+          <item> play </item>
+        </one-of>
+      </item>
+      
+      <item>
+        <tag>STOP</tag>
+        <one-of>
+          <item> stop recording </item>
+          <item> stop playing </item>
+          <item> stop </item>
+          <item> finish </item>
+          <item> end </item>
+        </one-of>
+      </item>
+      
+    </one-of>
+  </rule>
+</grammar>
