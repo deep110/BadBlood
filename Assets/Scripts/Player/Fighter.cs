@@ -137,18 +137,12 @@ public class Fighter : MonoBehaviour {
 		}
 	}
 
-	public bool punchingLeft {
+	public bool punching {
 		get {
-			return currentState == FighterStates.PUNCH_LEFT;
+			return currentState == FighterStates.PUNCH;
 		}	
 	}
 
-	public bool punchingRight {
-		get {
-			return currentState == FighterStates.PUNCH_RIGHT;
-		}	
-	}
-	
 	public bool kicking {
 		get {
 			return currentState == FighterStates.KICK;
