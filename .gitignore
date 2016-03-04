@@ -31,4 +31,5 @@ KinectDemos/
 
 #Kinect Generated files
 vgbtechs/
+NuiDatabase/
 *.dll
