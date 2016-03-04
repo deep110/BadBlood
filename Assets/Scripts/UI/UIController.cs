@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HealthController : MonoBehaviour {
+public class UIController : MonoBehaviour {
 	public Fighter player1;
 	public Fighter player2;
 
@@ -14,7 +14,7 @@ public class HealthController : MonoBehaviour {
 
 	public Text timerText;
 
-	//public BattleController battle;
+	public BattleController battle;
 
 
 	// Use this for initialization
@@ -25,7 +25,7 @@ public class HealthController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*	timerText.text = battle.roundTime.ToString();*/
+			timerText.text = battle.roundTime.ToString();
 
 		if (leftBar.size > player1.healthPercent) {
 			leftBar.size-= 0.01f;
