@@ -1173,7 +1173,7 @@ public class KinectGestures
 				if ((timestamp - gestureData.timestamp) < 1.5f) {
 					bool isInPose = jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [rightHipIndex] 
 					&& (jointsPos [rightAnkleIndex].z - jointsPos [leftAnkleIndex].z) < -0.4f
-					&& (jointsPos[rightAnkleIndex].y > )
+					&& (jointsPos[rightAnkleIndex].y-jointsPos[leftAnkleIndex].y) > 0.3f
 					;
 					if (isInPose) {
 						Vector3 jointPos = jointsPos [gestureData.joint];
