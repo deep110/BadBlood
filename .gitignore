@@ -28,3 +28,8 @@ sysinfo.txt
 
 #Ignoring Kinect Demo Projects
 KinectDemos/
+
+#Kinect Generated files
+vgbtechs/
+NuiDatabase/
+*.dll
