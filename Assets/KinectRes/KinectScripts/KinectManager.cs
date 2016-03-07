@@ -1098,8 +1098,7 @@ public class KinectManager : MonoBehaviour
 	/// <param name="bValidBox">If set to <c>true</c>, the previously set coordinates are valid</param>
 	public bool GetRightHandInteractionBox(Int64 userId, ref Vector3 leftBotBack, ref Vector3 rightTopFront, bool bValidBox)
 	{
-		if(dictUserIdToIndex.ContainsKey(userId))
-		{
+		if(dictUserIdToIndex.ContainsKey(userId)){
 			int index = dictUserIdToIndex[userId];
 			
 			if(index >= 0 && index < sensorData.bodyCount && 
@@ -2066,13 +2065,6 @@ public class KinectManager : MonoBehaviour
 				{
 					if(gestureData.complete)
 					{
-//						if(gestureData.gesture == KinectGestures.Gestures.Click)
-//						{
-//							if(controlMouseCursor)
-//							{
-//								MouseControl.MouseClick();
-//							}
-//						}
 				
 						foreach(KinectGestures.GestureListenerInterface listener in gestureListeners)
 						{
@@ -2092,23 +2084,8 @@ public class KinectManager : MonoBehaviour
 							}
 						}
 					}
-					else if(gestureData.progress >= 0.1f)
-					{
-//						if((gestureData.gesture == KinectGestures.Gestures.RightHandCursor || 
-//						    gestureData.gesture == KinectGestures.Gestures.LeftHandCursor) && 
-//						   gestureData.progress >= 0.5f)
-//						{
-//							if(handCursor != null)
-//							{
-//								handCursor.transform.position = Vector3.Lerp(handCursor.transform.position, gestureData.screenPos, 3 * Time.deltaTime);
-//							}
-//							
-//							if(controlMouseCursor)
-//							{
-//								MouseControl.MouseMove(gestureData.screenPos);
-//							}
-//						}
-						
+					else if(gestureData.progress >= 0.1f){
+
 						foreach(KinectGestures.GestureListenerInterface listener in gestureListeners)
 						{
 							if(listener != null)
@@ -2440,11 +2417,6 @@ public class KinectManager : MonoBehaviour
 				// process special cases
 				ProcessBodySpecialData(ref bodyData);
 
-////// 		turnaround mode start
-				// determine if the user is turned around
-				//float bodyTurnAngle = 0f;
-				//float neckTiltAngle = 0f;
-
 				if(allowTurnArounds && // sensorData.sensorInterface.IsFaceTrackingActive() &&
 				   bodyData.joint[(int)KinectInterop.JointType.Neck].trackingState != KinectInterop.TrackingState.NotTracked)
 				{
@@ -2651,86 +2623,7 @@ public class KinectManager : MonoBehaviour
 			Quaternion turnRot = Quaternion.FromToRotation(Vector3.right, shouldersDir);
 			bodyData.bodyTurnAngle = turnRot.eulerAngles.y;
 		}
-		
-//				if(bodyData.joint[(int)KinectInterop.JointType.ElbowLeft].trackingState != KinectInterop.TrackingState.NotTracked &&
-//				   bodyData.joint[(int)KinectInterop.JointType.WristLeft].trackingState != KinectInterop.TrackingState.NotTracked)
-//				{
-//					Vector3 pos1 = bodyData.joint[(int)KinectInterop.JointType.ElbowLeft].position;
-//					Vector3 pos2 = bodyData.joint[(int)KinectInterop.JointType.WristLeft].position;
-//					
-//					bodyData.leftArmDirection = pos2 - pos1;
-//				}
-
-//				if(allowHandRotations && bodyData.leftArmDirection != Vector3.zero &&
-//				   bodyData.joint[(int)KinectInterop.JointType.WristLeft].trackingState != KinectInterop.TrackingState.NotTracked &&
-//				   bodyData.joint[(int)KinectInterop.JointType.ThumbLeft].trackingState != KinectInterop.TrackingState.NotTracked)
-//				{
-//					Vector3 pos1 = bodyData.joint[(int)KinectInterop.JointType.WristLeft].position;
-//					Vector3 pos2 = bodyData.joint[(int)KinectInterop.JointType.ThumbLeft].position;
-//
-//					Vector3 armDir = bodyData.leftArmDirection;
-//					armDir.z = -armDir.z;
-//					
-//					bodyData.leftThumbDirection = pos2 - pos1;
-//					bodyData.leftThumbDirection.z = -bodyData.leftThumbDirection.z;
-//					bodyData.leftThumbDirection -= Vector3.Project(bodyData.leftThumbDirection, armDir);
-//					
-//					bodyData.leftThumbForward = Quaternion.AngleAxis(bodyData.bodyTurnAngle, Vector3.up) * Vector3.forward;
-//					bodyData.leftThumbForward -= Vector3.Project(bodyData.leftThumbForward, armDir);
-//
-//					if(bodyData.leftThumbForward.sqrMagnitude < 0.01f)
-//					{
-//						bodyData.leftThumbForward = Vector3.zero;
-//					}
-//				}
-//				else
-//				{
-//					if(bodyData.leftThumbDirection != Vector3.zero)
-//					{
-//						bodyData.leftThumbDirection = Vector3.zero;
-//						bodyData.leftThumbForward = Vector3.zero;
-//					}
-//				}
-
-//				if(bodyData.joint[(int)KinectInterop.JointType.ElbowRight].trackingState != KinectInterop.TrackingState.NotTracked &&
-//				   bodyData.joint[(int)KinectInterop.JointType.WristRight].trackingState != KinectInterop.TrackingState.NotTracked)
-//				{
-//					Vector3 pos1 = bodyData.joint[(int)KinectInterop.JointType.ElbowRight].position;
-//					Vector3 pos2 = bodyData.joint[(int)KinectInterop.JointType.WristRight].position;
-//					
-//					bodyData.rightArmDirection = pos2 - pos1;
-//				}
-
-//				if(allowHandRotations && bodyData.rightArmDirection != Vector3.zero &&
-//				   bodyData.joint[(int)KinectInterop.JointType.WristRight].trackingState != KinectInterop.TrackingState.NotTracked &&
-//				   bodyData.joint[(int)KinectInterop.JointType.ThumbRight].trackingState != KinectInterop.TrackingState.NotTracked)
-//				{
-//					Vector3 pos1 = bodyData.joint[(int)KinectInterop.JointType.WristRight].position;
-//					Vector3 pos2 = bodyData.joint[(int)KinectInterop.JointType.ThumbRight].position;
-//
-//					Vector3 armDir = bodyData.rightArmDirection;
-//					armDir.z = -armDir.z;
-//					
-//					bodyData.rightThumbDirection = pos2 - pos1;
-//					bodyData.rightThumbDirection.z = -bodyData.rightThumbDirection.z;
-//					bodyData.rightThumbDirection -= Vector3.Project(bodyData.rightThumbDirection, armDir);
-//
-//					bodyData.rightThumbForward = Quaternion.AngleAxis(bodyData.bodyTurnAngle, Vector3.up) * Vector3.forward;
-//					bodyData.rightThumbForward -= Vector3.Project(bodyData.rightThumbForward, armDir);
-//
-//					if(bodyData.rightThumbForward.sqrMagnitude < 0.01f)
-//					{
-//						bodyData.rightThumbForward = Vector3.zero;
-//					}
-//				}
-//				else
-//				{
-//					if(bodyData.rightThumbDirection != Vector3.zero)
-//					{
-//						bodyData.rightThumbDirection = Vector3.zero;
-//						bodyData.rightThumbForward = Vector3.zero;
-//					}
-//				}
+	
 		
 		if(bodyData.joint[(int)KinectInterop.JointType.KneeLeft].trackingState != KinectInterop.TrackingState.NotTracked &&
 		   bodyData.joint[(int)KinectInterop.JointType.AnkleLeft].trackingState != KinectInterop.TrackingState.NotTracked &&
@@ -2927,16 +2820,6 @@ public class KinectManager : MonoBehaviour
 			}
 		}
 		
-//		for(int i = 0; i < avatarControllers.Count; i++)
-//		{
-//			AvatarController avatar = avatarControllers[i];
-//			
-//			if(avatar && avatar.playerIndex >= uidIndex && avatar.playerIndex < alUserIds.Count)
-//			{
-//				avatar.SuccessfulCalibration(alUserIds[avatar.playerIndex]);
-//			}
-//		}
-		
 		if(liPrimaryUserId == 0)
 		{
 			Debug.Log("Waiting for users.");
@@ -3017,19 +2900,7 @@ public class KinectManager : MonoBehaviour
 					        (joint == (int)KinectInterop.JointType.WristLeft) || 
 					        (joint == (int)KinectInterop.JointType.HandLeft))
 					{
-//						if(joint == (int)KinectInterop.JointType.WristLeft)
-//						{
-//							KinectInterop.JointData handData = bodyData.joint[(int)KinectInterop.JointType.HandLeft];
-//							KinectInterop.JointData handTipData = bodyData.joint[(int)KinectInterop.JointType.HandTipLeft];
-//							
-//							if(handData.trackingState != KinectInterop.TrackingState.NotTracked &&
-//							   handTipData.trackingState != KinectInterop.TrackingState.NotTracked)
-//							{
-//								jointDir = handData.direction + handTipData.direction;
-//								jointDir = new Vector3(jointDir.x, jointDir.y, -jointDir.z).normalized;
-//							}
-//						}
-						
+												
 						KinectInterop.JointData shCenterData = bodyData.joint[(int)KinectInterop.JointType.SpineShoulder];
 						if(shCenterData.trackingState != KinectInterop.TrackingState.NotTracked &&
 						   jointDir != Vector3.zero && shCenterData.direction != Vector3.zero &&
@@ -3073,24 +2944,7 @@ public class KinectManager : MonoBehaviour
 									fwdDir = Vector3.Cross(rightDir, upDir).normalized;
 									
 									jointData.normalRotation = Quaternion.LookRotation(fwdDir, upDir);
-									//bRotated = true;
-
-//									// fix invalid wrist rotation
-//									KinectInterop.JointData elbowData = bodyData.joint[(int)KinectInterop.JointType.ElbowLeft];
-//									if(elbowData.trackingState != KinectInterop.TrackingState.NotTracked)
-//									{
-//										Quaternion quatLocalRot = Quaternion.Inverse(elbowData.normalRotation) * jointData.normalRotation;
-//										float angleY = quatLocalRot.eulerAngles.y;
-//										
-//										if(angleY >= 90f && angleY < 270f && bodyData.leftHandOrientation != Quaternion.identity)
-//										{
-//											jointData.normalRotation = bodyData.leftHandOrientation;
-//										}
-//										
-//										bodyData.leftHandOrientation = jointData.normalRotation;
-//									}
-
-									//bRotated = true;
+	
 								}
 							}
 
@@ -3111,18 +2965,7 @@ public class KinectManager : MonoBehaviour
 					        (joint == (int)KinectInterop.JointType.WristRight) || 
 					        (joint == (int)KinectInterop.JointType.HandRight))
 					{
-//						if(joint == (int)KinectInterop.JointType.WristRight)
-//						{
-//							KinectInterop.JointData handData = bodyData.joint[(int)KinectInterop.JointType.HandRight];
-//							KinectInterop.JointData handTipData = bodyData.joint[(int)KinectInterop.JointType.HandTipRight];
-//
-//							if(handData.trackingState != KinectInterop.TrackingState.NotTracked &&
-//							   handTipData.trackingState != KinectInterop.TrackingState.NotTracked)
-//							{
-//								jointDir = handData.direction + handTipData.direction;
-//								jointDir = new Vector3(jointDir.x, jointDir.y, -jointDir.z).normalized;
-//							}
-//						}
+
 
 						KinectInterop.JointData shCenterData = bodyData.joint[(int)KinectInterop.JointType.SpineShoulder];
 						if(shCenterData.trackingState != KinectInterop.TrackingState.NotTracked &&
@@ -3169,22 +3012,7 @@ public class KinectManager : MonoBehaviour
 									jointData.normalRotation = Quaternion.LookRotation(fwdDir, upDir);
 									//bRotated = true;
 									
-//									// fix invalid wrist rotation
-//									KinectInterop.JointData elbowData = bodyData.joint[(int)KinectInterop.JointType.ElbowRight];
-//									if(elbowData.trackingState != KinectInterop.TrackingState.NotTracked)
-//									{
-//										Quaternion quatLocalRot = Quaternion.Inverse(elbowData.normalRotation) * jointData.normalRotation;
-//										float angleY = quatLocalRot.eulerAngles.y;
-//										
-//										if(angleY >= 90f && angleY < 270f && bodyData.rightHandOrientation != Quaternion.identity)
-//										{
-//											jointData.normalRotation = bodyData.rightHandOrientation;
-//										}
-//										
-//										bodyData.rightHandOrientation = jointData.normalRotation;
-//									}
 
-									//bRotated = true;
 								}
 							}
 
