@@ -1159,11 +1159,11 @@ public class KinectGestures
 			break;
 
 		case Gestures.KickHitRight:
-			switch (gestureData.state) {
+			switch (gestureData.state){
 			case 0:  // gesture detection - phase 1
 				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [rightHipIndex]
 				    && (jointsPos [rightAnkleIndex].z - jointsPos [rightHipIndex].z) < 0f 
-				    )
+				    ){
 					SetGestureJoint(ref gestureData, timestamp, rightAnkleIndex, jointsPos [rightAnkleIndex]);
 					gestureData.progress = 0.5f;
 				}
@@ -1186,6 +1186,51 @@ public class KinectGestures
 				break;
 			}
 			break;
+
+		// check for ZoomIn
+/*		case Gestures.WalkForward:
+		Vector3 vectorWalkForward = (Vector3)jointsPos [rightHandIndex] - jointsPos [leftHandIndex];
+		float distWalkForward = vectorWalkForward.magnitude;
+		
+		switch (gestureData.state) {
+		case 0:  // gesture detection - phase 1
+			if (jointsTracked [leftHandIndex] && jointsTracked [rightHandIndex] && jointsTracked [hipCenterIndex] && jointsTracked [shoulderCenterIndex] && jointsTracked [leftHipIndex] && jointsTracked [rightHipIndex] &&
+			    jointsPos [leftHandIndex].y >= gestureBottom && jointsPos [leftHandIndex].y <= gestureTop &&
+			    jointsPos [rightHandIndex].y >= gestureBottom && jointsPos [rightHandIndex].y <= gestureTop &&
+			    distZoomOut < 0.3f) {
+				SetGestureJoint (ref gestureData, timestamp, rightHandIndex, jointsPos [rightHandIndex]);
+				gestureData.tagVector = Vector3.right;
+				gestureData.tagFloat = 0f;
+				gestureData.progress = 0.3f;
+			}
+			break;
+			
+		case 1:  // gesture phase 2 = zooming
+			if ((timestamp - gestureData.timestamp) < 1.0f) {
+				float angleZoomOut = Vector3.Angle (gestureData.tagVector, vectorZoomOut) * Mathf.Sign (vectorZoomOut.y - gestureData.tagVector.y);
+				bool isInPose = jointsTracked [leftHandIndex] && jointsTracked [rightHandIndex] && jointsTracked [hipCenterIndex] && jointsTracked [shoulderCenterIndex] && jointsTracked [leftHipIndex] && jointsTracked [rightHipIndex] &&
+					jointsPos [leftHandIndex].y >= gestureBottom && jointsPos [leftHandIndex].y <= gestureTop &&
+						jointsPos [rightHandIndex].y >= gestureBottom && jointsPos [rightHandIndex].y <= gestureTop &&
+						distZoomOut < 1.5f && Mathf.Abs (angleZoomOut) < 20f;
+				
+				if (isInPose) {
+					SetZoomFactor (userId, ref gestureData, 1.0f, ref jointsPos, ref jointsTracked);
+					gestureData.timestamp = timestamp;
+					gestureData.progress = 0.7f;
+				}
+				//							else
+				//							{
+				//								// cancel the gesture
+				//								SetGestureCancelled(ref gestureData);
+				//							}
+			} else {
+				// cancel the gesture
+				SetGestureCancelled (ref gestureData);
+			}
+			break;
+		}
+		break;
+*/
 
 		}
 	}
