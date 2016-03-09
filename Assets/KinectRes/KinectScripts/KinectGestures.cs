@@ -99,8 +99,10 @@ public class KinectGestures
 		KickHitRight,
 		KickHitLeft,
 		Defend,
-		WalkForward,
-		WalkBackward,
+		WalkForwardLeft,
+		WalkForwardRight,
+		WalkBackwardLeft,
+		WalkBackwardRight,
 		SmashHit
 	}
 	
@@ -293,7 +295,8 @@ public class KinectGestures
 		float distZooming = vectorZooming.magnitude;
 		gestureData.screenPos.z = initialZoom + (distZooming / gestureData.tagFloat);
 	}
-	
+
+
 	private static void SetWheelRotation(long userId, ref GestureData gestureData, Vector3 initialPos, Vector3 currentPos)
 	{
 		float angle = Vector3.Angle(initialPos, currentPos) * Mathf.Sign(currentPos.y - initialPos.y);
@@ -547,13 +550,6 @@ public class KinectGestures
 		case Gestures.SwipeRight:
 			switch (gestureData.state) {
 			case 0:  // gesture detection - phase 1
-//						if(jointsTracked[leftHandIndex] && jointsTracked[leftElbowIndex] &&
-//				            (jointsPos[leftHandIndex].y - jointsPos[leftElbowIndex].y) > -0.05f &&
-//				            (jointsPos[leftHandIndex].x - jointsPos[leftElbowIndex].x) < 0f)
-//						{
-//							SetGestureJoint(ref gestureData, timestamp, leftHandIndex, jointsPos[leftHandIndex]);
-//							gestureData.progress = 0.5f;
-//						}
 
 				if (jointsTracked [leftHandIndex] && jointsTracked [hipCenterIndex] && jointsTracked [shoulderCenterIndex] && jointsTracked [leftHipIndex] && jointsTracked [rightHipIndex] &&
 					jointsPos [leftHandIndex].y >= gestureBottom && jointsPos [leftHandIndex].y <= gestureTop &&
@@ -565,16 +561,6 @@ public class KinectGestures
 				
 			case 1:  // gesture phase 2 = complete
 				if ((timestamp - gestureData.timestamp) < 1.5f) {
-//							bool isInPose = jointsTracked[leftHandIndex] && jointsTracked[leftElbowIndex] &&
-//								Mathf.Abs(jointsPos[leftHandIndex].y - jointsPos[leftElbowIndex].y) < 0.1f &&
-//								Mathf.Abs(jointsPos[leftHandIndex].y - gestureData.jointPos.y) < 0.08f && 
-//								(jointsPos[leftHandIndex].x - gestureData.jointPos.x) > 0.15f;
-//
-//							if(isInPose)
-//							{
-//								Vector3 jointPos = jointsPos[gestureData.joint];
-//								CheckPoseComplete(ref gestureData, timestamp, jointPos, isInPose, 0f);
-//							}
 
 					bool isInPose = jointsTracked [leftHandIndex] && jointsTracked [hipCenterIndex] && jointsTracked [shoulderCenterIndex] && jointsTracked [leftHipIndex] && jointsTracked [rightHipIndex] &&
 						jointsPos [leftHandIndex].y >= gestureBottom && jointsPos [leftHandIndex].y <= gestureTop &&
@@ -748,11 +734,6 @@ public class KinectGestures
 						gestureData.timestamp = timestamp;
 						gestureData.progress = 0.7f;
 					}
-//							else
-//							{
-//								// cancel the gesture
-//								SetGestureCancelled(ref gestureData);
-//							}
 				} else {
 					// cancel the gesture
 					SetGestureCancelled (ref gestureData);
@@ -992,20 +973,21 @@ public class KinectGestures
 			break;
 				
 		case Gestures.KickLeft:
-			switch (gestureData.state) {
+			switch (gestureData.state){
 			case 0:  // gesture detection - phase 1
 				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [leftHipIndex] &&
 					(jointsPos [leftAnkleIndex].z - jointsPos [leftHipIndex].z) < 0f &&
 					(jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z) > -0.2f) {
 					SetGestureJoint (ref gestureData, timestamp, leftAnkleIndex, jointsPos [leftAnkleIndex]);
-					gestureData.progress = 0.5f;
+					gestureData.progress = 0f;
 				}
 				break;
 					
 			case 1:  // gesture phase 2 = complete
 				if ((timestamp - gestureData.timestamp) < 1.5f) {
-					bool isInPose = jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [leftHipIndex] &&
-						(jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z) < -0.4f;
+					bool isInPose = jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+									&& jointsTracked [leftHipIndex] 
+					&& (jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z)<-0.4f;
 						
 					if (isInPose) {
 						Vector3 jointPos = jointsPos [gestureData.joint];
@@ -1062,10 +1044,6 @@ public class KinectGestures
 					gestureData.progress = 0f;
 				}
 				 
-				/*Debug.Log("RHI"+jointsPos[rightHandIndex]+" REI"+jointsPos[rightElbowIndex]+" RSI"+jointsPos[rightShoulderIndex]
-				          +" LHI"+jointsPos[leftHandIndex]+" LEI"+jointsPos[leftElbowIndex]+" LSI"+jointsPos[leftShoulderIndex]);
-				*/
-
 				break;
 				
 			case 1:  // gesture phase 2 = complete
@@ -1143,8 +1121,6 @@ public class KinectGestures
 
 					&&(jointsPos [leftShoulderIndex].y -jointsPos[leftElbowIndex].y)< 0.1f
 					&&(jointsPos [rightShoulderIndex].y - jointsPos[rightElbowIndex].y)< 0.1f
-					//&&(jointsPos [leftHandIndex].z + 0.2f)>jointsPos[leftElbowIndex].z 
-					//&&(jointsPos [rightHandIndex].z +0.2f)>jointsPos[rightElbowIndex].z
 					; 
 					if (isInPose) {
 						Vector3 jointPos = jointsPos [gestureData.joint];
@@ -1173,9 +1149,8 @@ public class KinectGestures
 				if ((timestamp - gestureData.timestamp) < 1.5f) {
 					bool isInPose = jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [rightHipIndex] 
 					&& (jointsPos [rightAnkleIndex].z - jointsPos [leftAnkleIndex].z) < -0.4f
-					&& (jointsPos[rightAnkleIndex].y-jointsPos[leftAnkleIndex].y) > 0.3f
-					;
-					if (isInPose) {
+					&& (jointsPos[rightAnkleIndex].y-jointsPos[leftAnkleIndex].y)>0.3f;
+					if(isInPose){
 						Vector3 jointPos = jointsPos [gestureData.joint];
 						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
 					}
@@ -1187,51 +1162,189 @@ public class KinectGestures
 			}
 			break;
 
-		// check for ZoomIn
-/*		case Gestures.WalkForward:
-		Vector3 vectorWalkForward = (Vector3)jointsPos [rightHandIndex] - jointsPos [leftHandIndex];
-		float distWalkForward = vectorWalkForward.magnitude;
-		
-		switch (gestureData.state) {
-		case 0:  // gesture detection - phase 1
-			if (jointsTracked [leftHandIndex] && jointsTracked [rightHandIndex] && jointsTracked [hipCenterIndex] && jointsTracked [shoulderCenterIndex] && jointsTracked [leftHipIndex] && jointsTracked [rightHipIndex] &&
-			    jointsPos [leftHandIndex].y >= gestureBottom && jointsPos [leftHandIndex].y <= gestureTop &&
-			    jointsPos [rightHandIndex].y >= gestureBottom && jointsPos [rightHandIndex].y <= gestureTop &&
-			    distZoomOut < 0.3f) {
-				SetGestureJoint (ref gestureData, timestamp, rightHandIndex, jointsPos [rightHandIndex]);
-				gestureData.tagVector = Vector3.right;
-				gestureData.tagFloat = 0f;
-				gestureData.progress = 0.3f;
-			}
-			break;
-			
-		case 1:  // gesture phase 2 = zooming
-			if ((timestamp - gestureData.timestamp) < 1.0f) {
-				float angleZoomOut = Vector3.Angle (gestureData.tagVector, vectorZoomOut) * Mathf.Sign (vectorZoomOut.y - gestureData.tagVector.y);
-				bool isInPose = jointsTracked [leftHandIndex] && jointsTracked [rightHandIndex] && jointsTracked [hipCenterIndex] && jointsTracked [shoulderCenterIndex] && jointsTracked [leftHipIndex] && jointsTracked [rightHipIndex] &&
-					jointsPos [leftHandIndex].y >= gestureBottom && jointsPos [leftHandIndex].y <= gestureTop &&
-						jointsPos [rightHandIndex].y >= gestureBottom && jointsPos [rightHandIndex].y <= gestureTop &&
-						distZoomOut < 1.5f && Mathf.Abs (angleZoomOut) < 20f;
-				
-				if (isInPose) {
-					SetZoomFactor (userId, ref gestureData, 1.0f, ref jointsPos, ref jointsTracked);
-					gestureData.timestamp = timestamp;
-					gestureData.progress = 0.7f;
+		case Gestures.WalkForwardLeft:
+			switch (gestureData.state){
+			case 0:  // gesture detection - phase 1
+				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+				    && jointsTracked [leftHipIndex] 
+				    &&(jointsPos [leftAnkleIndex].z - jointsPos [leftHipIndex].z) < 0f 
+				    &&(jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z) > -0.2f) {
+					SetGestureJoint (ref gestureData, timestamp, leftAnkleIndex, jointsPos [leftAnkleIndex]);
+					gestureData.progress = 0f;
+
 				}
-				//							else
-				//							{
-				//								// cancel the gesture
-				//								SetGestureCancelled(ref gestureData);
-				//							}
-			} else {
-				// cancel the gesture
-				SetGestureCancelled (ref gestureData);
+				break;
+
+			case 1:  // gesture phase 2 = complete
+				if ((timestamp - gestureData.timestamp) < 2f) {
+					Vector3 diffAnkle = jointsPos[leftAnkleIndex] - gestureData.jointPos;
+					bool isInPose = 
+						jointsTracked[leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [leftHipIndex] 
+					    && (jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z)< -0.15f
+						&& diffAnkle.magnitude > 0.1f;
+					
+					if (isInPose){
+						Vector3 jointPos = jointsPos [gestureData.joint];
+						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
+					}
+				} else {
+					// cancel the gesture
+					SetGestureCancelled (ref gestureData);
+				}
+				break;
+
 			}
 			break;
-		}
-		break;
-*/
+
+		case Gestures.WalkForwardRight:
+			switch (gestureData.state){
+			case 0:  // gesture detection - phase 1
+				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+				          && jointsTracked [rightHipIndex] 
+				          &&(jointsPos [rightAnkleIndex].z - jointsPos [rightHipIndex].z) < 0f 
+				          &&(jointsPos [rightAnkleIndex].z - jointsPos [leftAnkleIndex].z) > -0.2f) {
+					
+					SetGestureJoint (ref gestureData, timestamp, rightAnkleIndex, jointsPos [rightAnkleIndex]);
+					gestureData.progress = 0f;
+				}
+				break;
+				
+			case 1:  // gesture phase 2 = complete
+				if ((timestamp - gestureData.timestamp) < 2f) {
+					Vector3 diffAnkle = jointsPos[rightAnkleIndex] - gestureData.jointPos; 
+					bool isInPose = 
+						jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+						&& jointsTracked [rightHipIndex] 
+						&&(jointsPos [rightAnkleIndex].z - jointsPos [leftAnkleIndex].z) < -0.2f
+						&& diffAnkle.magnitude>0.1f;
+					if (isInPose){
+						Vector3 jointPos = jointsPos [gestureData.joint];
+						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
+					}
+				} else {
+					// cancel the gesture
+					SetGestureCancelled (ref gestureData);
+				}
+				break;
+				
+			}
+			break;
+
+		case Gestures.WalkBackwardRight:
+			switch (gestureData.state){
+			case 0:  // gesture detection - phase 1
+				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+				    && jointsTracked [rightHipIndex] 
+				    &&(jointsPos [rightAnkleIndex].z - jointsPos [rightHipIndex].z) > 0f 
+				    &&(jointsPos [rightAnkleIndex].z - jointsPos [leftAnkleIndex].z) < +0.2f) {
+					
+					SetGestureJoint (ref gestureData, timestamp, rightAnkleIndex, jointsPos [rightAnkleIndex]);
+					gestureData.progress = 0f;
+				}
+				break;
+
+			case 1:  // gesture phase 2 = complete
+				if ((timestamp - gestureData.timestamp) < 2f){
+					Vector3 diffAnkle = jointsPos[rightAnkleIndex] - gestureData.jointPos;
+					bool isInPose = 
+						jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+						&& jointsTracked [rightHipIndex] 
+						&&(jointsPos[rightAnkleIndex].z - jointsPos [leftAnkleIndex].z) > 0.15f
+						&& diffAnkle.magnitude > 0.1f;
+					if (isInPose) {
+						Vector3 jointPos = jointsPos [gestureData.joint];
+						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
+					}
+				} else {
+					// cancel the gesture
+					SetGestureCancelled (ref gestureData);
+				}
+				break;
+				
+			}
+			break;
+
+		case Gestures.WalkBackwardLeft:
+			switch (gestureData.state){
+			case 0:  // gesture detection - phase 1
+				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] 
+				    && jointsTracked [leftHipIndex] 
+				    &&(jointsPos [leftAnkleIndex].z - jointsPos [leftHipIndex].z) > 0f 
+				    &&(jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z) < 0.2f) {
+					SetGestureJoint (ref gestureData, timestamp, leftAnkleIndex, jointsPos [leftAnkleIndex]);
+					gestureData.progress = 0f;
+					
+				}
+				break;
+				
+			case 1:  // gesture phase 2 = complete
+				if ((timestamp - gestureData.timestamp) < 2f){
+					Vector3 diffAnkle = jointsPos[leftAnkleIndex] - gestureData.jointPos;
+					bool isInPose = 
+						jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [leftHipIndex] 
+						&& (jointsPos [leftAnkleIndex].z - jointsPos [rightAnkleIndex].z)> 0.15f
+						&& diffAnkle.magnitude > 0.1f;
+					
+					if (isInPose) {
+						Vector3 jointPos = jointsPos [gestureData.joint];
+						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
+					}
+				} else {
+					// cancel the gesture
+					SetGestureCancelled (ref gestureData);
+				}
+				break;
+				
+			}
+			break;
+
+		case Gestures.SmashHit:
+			switch (gestureData.state){
+			case 0:  // gesture detection - phase 1
+				Vector3 diffHands = jointsPos[leftHandIndex]-jointsPos[rightHandIndex];
+				if (jointsTracked [rightHandIndex] && jointsTracked [rightElbowIndex] && 
+				    jointsTracked [rightShoulderIndex] && jointsTracked[leftHandIndex] 
+				    && jointsTracked[leftElbowIndex] && jointsTracked[leftShoulderIndex]
+				    && (jointsPos [rightHandIndex].y - jointsPos [rightElbowIndex].y) > 0f
+				    && (jointsPos [leftHandIndex].y - jointsPos [leftElbowIndex].y) > 0f
+				    &&(jointsPos[rightHandIndex].z - jointsPos[rightShoulderIndex].z < 0.1f)
+				    &&(jointsPos[leftHandIndex].z - jointsPos[leftShoulderIndex].z < 0.1f)
+				    && diffHands.magnitude < 0.1f
+				    ){
+					
+					SetGestureJoint (ref gestureData, timestamp, rightHandIndex, jointsPos [rightHandIndex]);
+					gestureData.progress = 0f;
+				}
+				
+				break;
+				
+			case 1:  // gesture phase 2 = complete
+				diffHands = jointsPos[leftHandIndex]-jointsPos[rightHandIndex];
+				if ((timestamp - gestureData.timestamp) < 1.5f) {
+					bool isInPose = 
+						jointsTracked [rightHandIndex] && jointsTracked [leftElbowIndex] 
+						&& jointsTracked [rightShoulderIndex] &&
+							(jointsPos [rightHandIndex].y - jointsPos [leftElbowIndex].y) > -0.1f 
+							&& (jointsPos [rightHandIndex].y - jointsPos [leftElbowIndex].y) > -0.1f 
+							&& Mathf.Abs (jointsPos [rightHandIndex].x - gestureData.jointPos.x) < 0.2f 
+							//&& (jointsPos [rightHandIndex].z - gestureData.jointPos.z) < -0.15f
+							&& diffHands.magnitude < 0.1f
+							;
+					
+					if (isInPose){
+						Vector3 jointPos = jointsPos [gestureData.joint];
+						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
+					}
+				} else{
+					// cancel the gesture
+					SetGestureCancelled (ref gestureData);
+				}
+				break;
+			}
+			break;
+
 
 		}
 	}
+
 }

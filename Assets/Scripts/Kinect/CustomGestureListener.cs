@@ -7,7 +7,7 @@ using System.Collections;
 public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListenerInterface{
 
 	private bool progressDisplayed;
-	private float progressGestureTime;
+
 	
 	public void UserDetected(long userId, int userIndex){
 		KinectManager kinectManager = KinectManager.Instance;
@@ -19,14 +19,14 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Jump);
 		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Squat);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.Defend);
-		kinectManager.DetectGesture (userId,KinectGestures.Gestures.KickHitLeft);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.KickHitRight);
-		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForward);
-		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackward);
 
-		//kinectManager.DetectGesture (userId,KinectGestures.Gestures.Push);
+		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardRight);
+		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardLeft);
+		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardRight);
+		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardLeft);
+		//kinectManager.DetectGesture (userId, KinectGestures.Gestures.SmashHit);
 
-		//Debug.Log("User detected in CustomGestureListener.");
 	}
 	
 	public void UserLost(long userId, int userIndex){
@@ -35,7 +35,6 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 	
 	public void GestureInProgress(long userId, int userIndex, KinectGestures.Gestures gesture, 
 	                              float progress, KinectInterop.JointType joint, Vector3 screenPos){
-			progressGestureTime = Time.realtimeSinceStartup;
 		  //  Debug.Log(gesture);
 	}
 
@@ -50,10 +49,8 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 	}
 	
 	public bool GestureCancelled(long userId, int userIndex, KinectGestures.Gestures gesture, 
-	                             KinectInterop.JointType joint)
-	{
-		if(progressDisplayed)
-		{
+	                             KinectInterop.JointType joint){
+		if(progressDisplayed){
 			progressDisplayed = false;
 		}
 		
@@ -61,10 +58,7 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 	}
 
 	public void Update(){
-		if(progressDisplayed && ((Time.realtimeSinceStartup - progressGestureTime) > 2f)){
-			progressDisplayed = false;
-			Debug.Log("Forced progress to end.");
-		}
+
 	}
 }
 
