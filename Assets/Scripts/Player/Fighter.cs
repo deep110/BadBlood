@@ -20,6 +20,10 @@ public class Fighter : MonoBehaviour {
 	public float health = MAX_HEALTH;
 	private Rigidbody myBody;
 
+	//for AI
+	private float random;
+	private float randomSetTime;
+
 	// Use this for initialization
 	void Start () {
 		myBody = GetComponent<Rigidbody> ();
@@ -62,20 +66,24 @@ public class Fighter : MonoBehaviour {
 
 	}
 
-/*	public void UpdateAiInput (){
+	public void UpdateAiInput (){
 		animator.SetBool ("defending", defending);
 		//animator.SetBool ("invulnerable", invulnerable);
 		//animator.SetBool ("enable", enable);
 
-		animator.SetBool ("oponent_attacking", oponent.attacking);
-		animator.SetFloat ("distanceToOponent", getDistanceToOponennt());
+		animator.SetBool ("oponent_attacking", enemy.punching||enemy.kicking);
+		animator.SetFloat ("distanceToOponent", getDistanceToOponent());
 
 		if (Time.time - randomSetTime > 1) {
 			random = Random.value;
 			randomSetTime = Time.time;
 		}
 		animator.SetFloat ("random", random);
-	}*/
+	}
+
+	private float getDistanceToOponent(){
+		return Mathf.Abs(transform.position.x - enemy.transform.position.x);
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -90,6 +98,8 @@ public class Fighter : MonoBehaviour {
 		if (enable) {
 			if (player == PlayerType.HUMAN) {
 				UpdateHumanInput ();
+			}else{
+				UpdateAiInput();
 			}
 
 		}
