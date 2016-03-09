@@ -68,9 +68,6 @@ public class Fighter : MonoBehaviour {
 
 	public void UpdateAiInput (){
 		animator.SetBool ("defending", defending);
-		//animator.SetBool ("invulnerable", invulnerable);
-		//animator.SetBool ("enable", enable);
-
 		animator.SetBool ("oponent_attacking", enemy.punching||enemy.kicking);
 		animator.SetFloat ("distanceToOponent", getDistanceToOponent());
 
