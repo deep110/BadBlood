@@ -1,0 +1,267 @@
+# Blender MTL File: 'guile stage.blend'
+# Material Count: 26
+
+newmtl Cylinder001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Cylinder002
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Cylinder004
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Fence
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Fence001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material__26
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Interior.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Interior.tga
+
+newmtl Pin003
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Pin004
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Pin011
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Tex_0333_1_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\USAF.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\USAF.tga
+
+newmtl Tex_0334_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Interior.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Interior.tga
+
+newmtl Tex_0659_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Markings.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Markings.tga
+
+newmtl Tex_0663_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Glass.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Glass.tga
+
+newmtl Tex_0667_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Tex_0667_0.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Tex_0667_0.tga
+
+newmtl Tex_0669_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Tex_0669_0.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Tex_0669_0.tga
+
+newmtl Tex_0670_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Tex_0670_0.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Tex_0670_0.tga
+
+newmtl Tex_0671_0_dds
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Tex_0671_0.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Tex_0671_0.tga
+
+newmtl asphalt
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Interior.tga
+
+newmtl asphalt_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl body_navy
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\USAF.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\USAF.tga
+
+newmtl crate
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.258032 0.258032 0.258032
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\Downloads\89nljatdmrk0-Crate_box\caixote_uv_pronto.png
+map_Bump D:\\Miguel\\Downloads\\89nljatdmrk0-Crate_box\\caixote_uv_pronto.png
+
+newmtl glass
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Tex_0661_0.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Glass.tga
+
+newmtl glass_Glass.tga.001
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Glass.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Glass.tga
+
+newmtl markings
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Markings.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Markings.tga
+
+newmtl markings_Markings.tga.005
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd D:\Miguel\OneDrive\Proyectos\FightingGame\plane\Markings.tga
+map_Ka D:\\Miguel\\OneDrive\\Proyectos\\FightingGame\\plane\\Markings.tga
+
+newmtl sidewalk
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
