@@ -55,5 +55,14 @@ public class BattleController : MonoBehaviour {
 				battleEnded = true;
 			}
 		}
+
+		//kepping a minimum distance i.e 0.4
+		/*float distance = Mathf.Abs(player1.transform.position.x - player2.transform.position.x);
+		Debug.Log (distance);	
+		if (distance < 0.4f) {
+			player1.transform.position = (player1.transform.position - player2.transform.position).normalized
+				* 0.4f + new Vector3(player2.transform.position.x,0,0);
+		}*/
+
 	}
 }
