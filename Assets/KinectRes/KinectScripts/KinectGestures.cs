@@ -1355,6 +1355,7 @@ public class KinectGestures
 					gestureData.progress = 0f;
 					//Debug.Log("Squat Released");
 				}
+				break;
 
 			case 1:  // gesture phase 2 = complete
 				

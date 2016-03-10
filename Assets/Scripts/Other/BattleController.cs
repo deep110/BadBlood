@@ -55,6 +55,9 @@ public class BattleController : MonoBehaviour {
 				battleEnded = true;
 			}
 		}
+		if (battleEnded) {
+			Application.LoadLevel("StartScene");
+		}
 
 	}
 }

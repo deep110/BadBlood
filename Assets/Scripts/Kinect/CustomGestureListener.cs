@@ -28,7 +28,9 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardLeft);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardLeft);
-		//kinectManager.DetectGesture (userId, KinectGestures.Gestures.SmashHit);
+
+		kinectManager.DetectGesture (userId, KinectGestures.Gestures.StandUp);
+		kinectManager.DetectGesture (userId, KinectGestures.Gestures.SmashHit);
 
 	}
 	
@@ -82,6 +84,12 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 
 		case KinectGestures.Gestures.Jump:
 			fighter.jump();
+			break;
+
+		case KinectGestures.Gestures.StandUp:
+			break;
+
+		case KinectGestures.Gestures.SmashHit:
 			break;
 		}
 

@@ -20,7 +20,8 @@ public class Fighter : MonoBehaviour {
 	protected Animator animator;
 	private Rigidbody myBody;
 	private AudioSource audioPlayer;
-	private int countF, countB,countDefend, countSquat;
+	private int countF, countB,countDefend;
+	private bool isSquat;
 
 	//for AI
 	private float random;
@@ -59,12 +60,8 @@ public class Fighter : MonoBehaviour {
 			animator.SetBool ("Defend", false);
 		}
 
-		if (countSquat > 0) {
-			animator.SetBool ("Duck", true);
-			countSquat--;
-		} else {
-			animator.SetBool ("Duck", false);
-		}
+		animator.SetBool ("Duck", isSquat);
+
 	}
 
 	public void walkForward(){
@@ -97,7 +94,15 @@ public class Fighter : MonoBehaviour {
 	}
 
 	public void squat(){
-		countSquat = 10;
+		isSquat = true;
+	}
+
+	public void standUp(){
+		isSquat = false;
+	}
+
+	public void smashHit(){
+		animator.SetTrigger("SmashHit");
 	}
 
 	public void UpdateAiInput (){
