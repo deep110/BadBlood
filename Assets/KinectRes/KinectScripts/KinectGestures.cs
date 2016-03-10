@@ -103,7 +103,8 @@ public class KinectGestures
 		WalkForwardRight,
 		WalkBackwardLeft,
 		WalkBackwardRight,
-		SmashHit
+		SmashHit,
+		StandUp
 	}
 	
 	
@@ -1342,6 +1343,38 @@ public class KinectGestures
 				break;
 			}
 			break;
+
+
+			// check for StandUp
+		case Gestures.StandUp:
+			switch (gestureData.state) {
+			case 0:  // gesture detection - phase 1
+				if (jointsTracked [hipCenterIndex] && 
+				    (jointsPos [hipCenterIndex].y <= 0.5f)){
+					SetGestureJoint (ref gestureData, timestamp, hipCenterIndex, jointsPos [hipCenterIndex]);
+					gestureData.progress = 0f;
+					//Debug.Log("Squat Released");
+				}
+
+			case 1:  // gesture phase 2 = complete
+				
+				if ((timestamp - gestureData.timestamp) < 3f) {
+					bool isInPose = jointsTracked [hipCenterIndex] 
+					&& (gestureData.jointPos.y - jointsPos [hipCenterIndex].y) < -0.15f 
+					&& Mathf.Abs (jointsPos [hipCenterIndex].x - gestureData.jointPos.x) < 0.2f;
+					
+					if (isInPose){
+						Vector3 jointPos = jointsPos [gestureData.joint];
+						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
+					}
+				} else {
+					// cancel the gesture
+					SetGestureCancelled (ref gestureData);
+				}
+				break;
+			}
+			break;
+
 
 
 		}

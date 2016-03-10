@@ -16,10 +16,12 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 
 		kinectManager.DetectGesture(userId, KinectGestures.Gestures.PunchLeft);
 		kinectManager.DetectGesture(userId, KinectGestures.Gestures.PunchRight);
-		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Jump);
-		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Squat);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.Defend);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.KickHitRight);
+
+		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Jump);
+		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Squat);
+		kinectManager.DeleteGesture (userId, KinectGestures.Gestures.StandUp);
 
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardLeft);
