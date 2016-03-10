@@ -10,7 +10,7 @@ public class Fighter : MonoBehaviour {
 	public static float MAX_HEALTH = 100f;
 
 	public string fighterName;
-	public bool enable;
+	public bool enable = false;
 
 	public PlayerType player;
 	public Fighter enemy;

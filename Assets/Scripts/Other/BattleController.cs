@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class BattleController : MonoBehaviour {
+
 	public int roundTime = 100;
 	private float lastTimeUpdate = 0;
-	private bool battleStarted = true;
+	private bool battleStarted = false;
 	private bool battleEnded;
 
 	public Fighter player1;
@@ -12,10 +13,9 @@ public class BattleController : MonoBehaviour {
 	public BannerController banner;
 	public AudioSource musicPlayer;
 	public AudioClip backgroundMusic;
-
-	// Use this for initialization
+	
 	void Start () {
-//		banner.showRoundFight ();
+		banner.showFight ();
 	}
 
 	private void expireTime(){
@@ -27,14 +27,15 @@ public class BattleController : MonoBehaviour {
 	}
 
 	void Update () {
-/*		if (!battleStarted && !banner.isAnimating) {
+
+		if (!battleStarted && !banner.isAnimating) {
 			battleStarted = true;
 
 			player1.enable = true;
 			player2.enable = true;
 
 			//GameUtils.playSound(backgroundMusic, musicPlayer);
-		}*/
+		}
 
 		if (battleStarted && !battleEnded) {
 			if (roundTime > 0 && Time.time - lastTimeUpdate > 1) {
