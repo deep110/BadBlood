@@ -481,8 +481,7 @@ public class KinectInterop
 							sensorInt = null;
 						}
 					}
-					catch (Exception ex) 
-					{
+					catch (Exception ex) {
 						//Debug.Log(ex);
 						
 						if(sensorInt != null)
