@@ -7,19 +7,20 @@ public class Fighter : MonoBehaviour {
 		HUMAN, AI	
 	};
 
-	public static float MAX_HEALTH = 100f;
+	public float MAX_HEALTH = 100f;
+	public float health;
 
 	public string fighterName;
 	public bool enable = false;
 
 	public PlayerType player;
 	public Fighter enemy;
-	public float health = MAX_HEALTH;
 	public FighterStates currentState = FighterStates.IDLE;
 
 	protected Animator animator;
 	private Rigidbody myBody;
 	private AudioSource audioPlayer;
+	private int countF, countB,countDefend, countSquat;
 
 	//for AI
 	private float random;
@@ -30,41 +31,73 @@ public class Fighter : MonoBehaviour {
 		myBody = GetComponent<Rigidbody> ();
 		animator = GetComponent<Animator> ();
 		audioPlayer = GetComponent<AudioSource> ();
+		health = MAX_HEALTH;
 	}
 
 	public void UpdateHumanInput (){
-		if (Input.GetAxis ("Horizontal") > 0.1) {
+		if (countF > 0) {
 			animator.SetBool ("Walk", true);
+			countF--;
 		} else {
 			animator.SetBool ("Walk", false);
+			countF =0;
 		}
 
-		if (Input.GetAxis ("Horizontal") < -0.1) {
+		if (countB > 0) {
 			animator.SetBool ("WalkBack", true);
-			animator.SetBool ("Defend", false);
+			countB--;
 		} else {
 			animator.SetBool ("WalkBack", false);
+			countB =0;
+		}
+
+		if (countDefend>0) {
+			animator.SetBool ("Defend", true);
+			countDefend--;
+		} else {
+			countDefend = 0;
 			animator.SetBool ("Defend", false);
 		}
 
-		if (Input.GetAxis ("Vertical") < -0.1) {
+		if (countSquat > 0) {
 			animator.SetBool ("Duck", true);
+			countSquat--;
 		} else {
 			animator.SetBool ("Duck", false);
 		}
+	}
 
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			animator.SetTrigger("Jump");
-		} 
+	public void walkForward(){
+		countF = 20;
+	}
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			animator.SetTrigger("PunchRight");
-		}
+	public void walkBackward(){
+		countB = 20;
+	}
 
-		if (Input.GetKeyDown (KeyCode.K)) {
-			animator.SetTrigger("KickRight");
-		}
+	public void punchRight(){
+		animator.SetTrigger("PunchRight");
+	}
 
+	public void punchLeft(){
+		animator.SetTrigger("PunchLeft");
+	}
+
+	public void kickHit(){
+		animator.SetTrigger("KickRight");
+	}
+
+	public void defend(){
+		countDefend = 8;
+
+	}
+
+	public void jump(){
+		animator.SetTrigger("Jump");
+	}
+
+	public void squat(){
+		countSquat = 10;
 	}
 
 	public void UpdateAiInput (){
@@ -168,4 +201,39 @@ public class Fighter : MonoBehaviour {
 			return this.myBody;
 		}
 	}
+	//Keyboard inputs
+	/*public void UpdateHumanInput (){
+		if (Input.GetAxis ("Horizontal") > 0.1) {
+			animator.SetBool ("Walk", true);
+		} else {
+			animator.SetBool ("Walk", false);
+		}
+		
+		if (Input.GetAxis ("Horizontal") < -0.1) {
+			animator.SetBool ("WalkBack", true);
+			animator.SetBool ("Defend", false);
+		} else {
+			animator.SetBool ("WalkBack", false);
+			animator.SetBool ("Defend", false);
+		}
+		
+		if (Input.GetAxis ("Vertical") < -0.1) {
+			animator.SetBool ("Duck", true);
+		} else {
+			animator.SetBool ("Duck", false);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			animator.SetTrigger("Jump");
+		} 
+		
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			animator.SetTrigger("PunchRight");
+		}
+		
+		if (Input.GetKeyDown (KeyCode.K)) {
+			animator.SetTrigger("KickRight");
+		}
+		
+	}*/
 }

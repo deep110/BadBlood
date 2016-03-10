@@ -7,6 +7,7 @@ using System.Collections;
 public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListenerInterface{
 
 	private bool progressDisplayed;
+	public Fighter fighter;
 
 	
 	public void UserDetected(long userId, int userIndex){
@@ -42,9 +43,46 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 	public bool GestureCompleted(long userId, int userIndex, KinectGestures.Gestures gesture, 
 	                             KinectInterop.JointType joint, Vector3 screenPos){
 
-		//if(progressDisplayed)return true;
+
 		string sGestureText = gesture + " detected";
 		Debug.Log(sGestureText);
+
+		switch (gesture) {
+		case KinectGestures.Gestures.PunchLeft:
+			fighter.punchLeft();
+			break;
+
+		case KinectGestures.Gestures.PunchRight:
+			fighter.punchRight();
+			break;
+
+		case KinectGestures.Gestures.Defend:
+			fighter.defend();
+			break;
+
+		case KinectGestures.Gestures.KickHitRight:
+			fighter.kickHit();
+			break;
+		
+		case KinectGestures.Gestures.WalkForwardLeft:
+		case KinectGestures.Gestures.WalkForwardRight:
+			fighter.walkForward();
+			break;
+
+		case KinectGestures.Gestures.WalkBackwardLeft:
+		case KinectGestures.Gestures.WalkBackwardRight:
+			fighter.walkBackward();
+			break;
+
+		case KinectGestures.Gestures.Squat:
+			fighter.squat();
+			break;
+
+		case KinectGestures.Gestures.Jump:
+			fighter.jump();
+			break;
+		}
+
 		return true;
 	}
 	
