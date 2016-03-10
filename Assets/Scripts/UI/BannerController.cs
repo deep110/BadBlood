@@ -3,35 +3,39 @@ using System.Collections;
 
 public class BannerController : MonoBehaviour {
 
-	private Animator animator;
+	protected Animator animator;
 	private AudioSource audioPlayer;
 
 	private bool animating;
-
-	// Use this for initialization
-	void Start () {
-		animator = GetComponent<Animator> ();
-		audioPlayer = GetComponent<AudioSource> ();
 	
+	void Start () {
+		animator = GetComponent<Animator>();
+		audioPlayer = GetComponent<AudioSource>();
 	}
 
-	public void showRoundFight(){
+	public void showFight(){
 		animating = true;
-		animator.SetTrigger ("SHOW_ROUND_FIGHT");
+		if (animator == null)
+			animator = GetComponent<Animator> ();
+		animator.SetTrigger ("SHOW_FIGHT");
 	}
 
 	public void showYouWin(){
 		animating = true;
+		if (animator == null)
+			animator = GetComponent<Animator> ();
 		animator.SetTrigger ("SHOW_YOU_WIN");
 	}
 
 	public void showYouLose(){
 		animating = true;
+		if (animator == null)
+			animator = GetComponent<Animator> ();
 		animator.SetTrigger ("SHOW_YOU_LOSE");
 	}
 
 	public void playVoice(AudioClip voice){
-		//GameUtils.playSound (voice, audioPlayer);
+		GameUtils.playSound (voice, audioPlayer);
 	}
 
 	public void animationEnded(){

@@ -10,15 +10,16 @@ public class Fighter : MonoBehaviour {
 	public static float MAX_HEALTH = 100f;
 
 	public string fighterName;
-	public bool enable;
+	public bool enable = false;
 
 	public PlayerType player;
 	public Fighter enemy;
+	public float health = MAX_HEALTH;
 	public FighterStates currentState = FighterStates.IDLE;
 
 	protected Animator animator;
-	public float health = MAX_HEALTH;
 	private Rigidbody myBody;
+	private AudioSource audioPlayer;
 
 	//for AI
 	private float random;
@@ -28,7 +29,7 @@ public class Fighter : MonoBehaviour {
 	void Start () {
 		myBody = GetComponent<Rigidbody> ();
 		animator = GetComponent<Animator> ();
-		//audioPlayer = GetComponent<AudioSource> ();
+		audioPlayer = GetComponent<AudioSource> ();
 	}
 
 	public void UpdateHumanInput (){
@@ -68,9 +69,6 @@ public class Fighter : MonoBehaviour {
 
 	public void UpdateAiInput (){
 		animator.SetBool ("defending", defending);
-		//animator.SetBool ("invulnerable", invulnerable);
-		//animator.SetBool ("enable", enable);
-
 		animator.SetBool ("oponent_attacking", enemy.punching||enemy.kicking);
 		animator.SetFloat ("distanceToOponent", getDistanceToOponent());
 
@@ -129,7 +127,7 @@ public class Fighter : MonoBehaviour {
 	}
 
 	public void playSound(AudioClip sound){
-		//GameUtils.playSound (sound, audioPlayer);
+		GameUtils.playSound (sound, audioPlayer);
 	}
 
 	public bool invulnerable {
