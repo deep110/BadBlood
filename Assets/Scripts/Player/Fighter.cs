@@ -26,7 +26,7 @@ public class Fighter : MonoBehaviour {
 	//for AI
 	private float random;
 	private float randomSetTime;
-
+	private bool isDeathSet = false;
 	// Use this for initialization
 	void Start () {
 		myBody = GetComponent<Rigidbody> ();
@@ -62,6 +62,12 @@ public class Fighter : MonoBehaviour {
 
 		animator.SetBool ("Duck", isSquat);
 
+		
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.LoadLevel("StartScene");
+		}
+		
+
 	}
 
 	public void walkForward(){
@@ -85,8 +91,7 @@ public class Fighter : MonoBehaviour {
 	}
 
 	public void defend(){
-		countDefend = 8;
-
+		countDefend = 20;
 	}
 
 	public void jump(){
@@ -106,7 +111,8 @@ public class Fighter : MonoBehaviour {
 	}
 
 	public void UpdateAiInput (){
-		animator.SetBool ("defending", defending);
+
+		//animator.SetBool ("defending", defending);
 		animator.SetBool ("oponent_attacking", enemy.punching||enemy.kicking);
 		animator.SetFloat ("distanceToOponent", getDistanceToOponent());
 
@@ -132,7 +138,7 @@ public class Fighter : MonoBehaviour {
 		}
 
 		if (enable) {
-			if (player == PlayerType.HUMAN) {
+			if (player == PlayerType.HUMAN){
 				UpdateHumanInput ();
 			}else{
 				UpdateAiInput();
@@ -140,8 +146,10 @@ public class Fighter : MonoBehaviour {
 
 		}
 
-		if (health <= 0 && currentState != FighterStates.DEAD) {
-			animator.SetTrigger ("Dead");
+		if (health <= 1 && currentState != FighterStates.DEAD) {
+			if(!isDeathSet)
+			animator.SetTrigger("Dead");
+			isDeathSet = true;
 		}
 	}
 

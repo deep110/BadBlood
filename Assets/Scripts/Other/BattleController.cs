@@ -16,25 +16,27 @@ public class BattleController : MonoBehaviour {
 	
 	void Start () {
 		banner.showFight ();
+			musicPlayer = gameObject.AddComponent<AudioSource>();
+			GameUtils.playSoundtwo(backgroundMusic, musicPlayer);
 	}
 
 	private void expireTime(){
 		if (player1.healthPercent > player2.healthPercent) {
 			player2.health = 0;
-		} else {
+		} else if(player2.healthPercent > player1.healthPercent){
 			player1.health = 0;
+		} else{
+			player2.health = player1.health = 0;
 		}
 	}
 
 	void Update () {
 
-		if (!battleStarted && !banner.isAnimating) {
+		if (!battleStarted){
 			battleStarted = true;
 
 			player1.enable = true;
 			player2.enable = true;
-
-			//GameUtils.playSound(backgroundMusic, musicPlayer);
 		}
 
 		if (battleStarted && !battleEnded) {
@@ -55,9 +57,11 @@ public class BattleController : MonoBehaviour {
 				battleEnded = true;
 			}
 		}
-		if (battleEnded) {
+		/*
+		if (battleEnded){
 			Application.LoadLevel("StartScene");
 		}
+		*/
 
 	}
 }

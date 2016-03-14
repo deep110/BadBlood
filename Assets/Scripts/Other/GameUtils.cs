@@ -9,4 +9,12 @@ public class GameUtils {
 		audioPlayer.time = 0;
 		audioPlayer.Play ();
 	}
+
+	public static void playSoundtwo(AudioClip clip, AudioSource audioPlayer){
+		audioPlayer.Stop ();
+		audioPlayer.clip = clip;
+		audioPlayer.loop = true;
+		audioPlayer.time = 0;
+		audioPlayer.Play ();
+	}
 }

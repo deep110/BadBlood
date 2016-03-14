@@ -15,6 +15,9 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		if(!kinectManager|| (userId != kinectManager.GetPrimaryUserID()))
 			return;
 
+
+		//fighter = BattleController.player1;
+
 		kinectManager.DetectGesture(userId, KinectGestures.Gestures.PunchLeft);
 		kinectManager.DetectGesture(userId, KinectGestures.Gestures.PunchRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.Defend);
@@ -24,7 +27,7 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Squat);
 		kinectManager.DeleteGesture (userId, KinectGestures.Gestures.StandUp);
 
-		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardRight);
+		//kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardLeft);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardLeft);
@@ -79,7 +82,7 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 			break;
 
 		case KinectGestures.Gestures.Squat:
-			fighter.squat();
+			//fighter.squat();
 			break;
 
 		case KinectGestures.Gestures.Jump:
@@ -87,9 +90,11 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 			break;
 
 		case KinectGestures.Gestures.StandUp:
+		fighter.standUp();
 			break;
 
 		case KinectGestures.Gestures.SmashHit:
+		fighter.smashHit();
 			break;
 		}
 
