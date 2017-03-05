@@ -20,14 +20,14 @@ public class Fighter : MonoBehaviour {
 	protected Animator animator;
 	private Rigidbody myBody;
 	private AudioSource audioPlayer;
-	private int countF, countB,countDefend;
+	private int countF, countB,countDefend = 0;
 	private bool isSquat;
 
 	//for AI
 	private float random;
 	private float randomSetTime;
 	private bool isDeathSet = false;
-	// Use this for initialization
+
 	void Start () {
 		myBody = GetComponent<Rigidbody> ();
 		animator = GetComponent<Animator> ();
@@ -35,7 +35,9 @@ public class Fighter : MonoBehaviour {
 		health = MAX_HEALTH;
 	}
 
+
 	public void UpdateHumanInput (){
+		Debug.Log ("player"+health);
 		if (countF > 0) {
 			animator.SetBool ("Walk", true);
 			countF--;
@@ -66,7 +68,6 @@ public class Fighter : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			Application.LoadLevel("StartScene");
 		}
-		
 
 	}
 
@@ -95,6 +96,7 @@ public class Fighter : MonoBehaviour {
 	}
 
 	public void jump(){
+		isSquat = false;
 		animator.SetTrigger("Jump");
 	}
 
@@ -112,7 +114,7 @@ public class Fighter : MonoBehaviour {
 
 	public void UpdateAiInput (){
 
-		//animator.SetBool ("defending", defending);
+		animator.SetBool ("defending", defending);
 		animator.SetBool ("oponent_attacking", enemy.punching||enemy.kicking);
 		animator.SetFloat ("distanceToOponent", getDistanceToOponent());
 
@@ -143,7 +145,6 @@ public class Fighter : MonoBehaviour {
 			}else{
 				UpdateAiInput();
 			}
-
 		}
 
 		if (health <= 1 && currentState != FighterStates.DEAD) {
@@ -215,7 +216,7 @@ public class Fighter : MonoBehaviour {
 		}
 	}
 	//Keyboard inputs
-	/*public void UpdateHumanInput (){
+	/*public void KeyboardInterrupt (){
 		if (Input.GetAxis ("Horizontal") > 0.1) {
 			animator.SetBool ("Walk", true);
 		} else {

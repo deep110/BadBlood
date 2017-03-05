@@ -2,8 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-
-
 public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListenerInterface{
 
 	private bool progressDisplayed;
@@ -16,23 +14,20 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 			return;
 
 
-		//fighter = BattleController.player1;
-
 		kinectManager.DetectGesture(userId, KinectGestures.Gestures.PunchLeft);
 		kinectManager.DetectGesture(userId, KinectGestures.Gestures.PunchRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.Defend);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.KickHitRight);
 
 		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Jump);
-		kinectManager.DetectGesture(userId,KinectGestures.Gestures.Squat);
-		kinectManager.DeleteGesture (userId, KinectGestures.Gestures.StandUp);
+		//kinectManager.DetectGesture(userId,KinectGestures.Gestures.Squat);
+		//kinectManager.DeleteGesture (userId, KinectGestures.Gestures.StandUp);
 
-		//kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardRight);
+		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkForwardLeft);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardRight);
 		kinectManager.DetectGesture (userId,KinectGestures.Gestures.WalkBackwardLeft);
 
-		kinectManager.DetectGesture (userId, KinectGestures.Gestures.StandUp);
 		kinectManager.DetectGesture (userId, KinectGestures.Gestures.SmashHit);
 
 	}
@@ -43,7 +38,6 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 	
 	public void GestureInProgress(long userId, int userIndex, KinectGestures.Gestures gesture, 
 	                              float progress, KinectInterop.JointType joint, Vector3 screenPos){
-		  //  Debug.Log(gesture);
 	}
 
 	
@@ -82,7 +76,7 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 			break;
 
 		case KinectGestures.Gestures.Squat:
-			//fighter.squat();
+			fighter.squat();
 			break;
 
 		case KinectGestures.Gestures.Jump:
@@ -90,7 +84,7 @@ public class CustomGestureListener : MonoBehaviour, KinectGestures.GestureListen
 			break;
 
 		case KinectGestures.Gestures.StandUp:
-		fighter.standUp();
+			fighter.standUp();
 			break;
 
 		case KinectGestures.Gestures.SmashHit:

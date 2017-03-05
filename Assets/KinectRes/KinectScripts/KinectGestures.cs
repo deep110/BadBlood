@@ -1034,8 +1034,7 @@ public class KinectGestures
 			switch (gestureData.state){
 			case 0:  // gesture detection - phase 1
 				if (jointsTracked [leftAnkleIndex] && jointsTracked [rightAnkleIndex] && jointsTracked [rightHipIndex]
-				    && (jointsPos [rightAnkleIndex].z - jointsPos [rightHipIndex].z) < 0f 
-				    ){
+				    && (jointsPos [rightAnkleIndex].z - jointsPos [rightHipIndex].z) < 0f ){
 					SetGestureJoint(ref gestureData, timestamp, rightAnkleIndex, jointsPos [rightAnkleIndex]);
 					gestureData.progress = 0.5f;
 				}
@@ -1067,12 +1066,7 @@ public class KinectGestures
 				if (jointsTracked [rightHandIndex] && jointsTracked [rightElbowIndex] && 
 				    jointsTracked [rightShoulderIndex] && jointsTracked[leftHandIndex] 
 				    && jointsTracked[leftElbowIndex] && jointsTracked[leftShoulderIndex]
-				    //&& (jointsPos [rightHandIndex].y - jointsPos [rightElbowIndex].y) > 0f
-				    //&& (jointsPos [leftHandIndex].y - jointsPos [leftElbowIndex].y) > 0f
-				    //&&(jointsPos[rightHandIndex].z - jointsPos[rightShoulderIndex].z < 0.1f)
-				    //&&(jointsPos[leftHandIndex].z - jointsPos[leftShoulderIndex].z < 0.1f)
-				    && diffHands.magnitude < 0.15f
-				    ){
+				    && diffHands.magnitude < 0.15f){
 					SetGestureJoint (ref gestureData, timestamp, rightHandIndex, jointsPos [rightHandIndex]);
 					gestureData.progress = 0.5f;
 					//Debug.Log("Gesture 1 detected  "+ diffHands.magnitude);
@@ -1114,8 +1108,7 @@ public class KinectGestures
 				if (jointsTracked [rightHandIndex] && jointsTracked [rightElbowIndex] && 
 					jointsTracked [rightShoulderIndex] &&
 					(jointsPos [rightHandIndex].y - jointsPos [rightElbowIndex].y) > 0f 
-				    &&(jointsPos[rightHandIndex].z - jointsPos[rightShoulderIndex].z < 0.1f)
-				    ){
+				    &&(jointsPos[rightHandIndex].z - jointsPos[rightShoulderIndex].z < 0.1f)){
 	
 					SetGestureJoint (ref gestureData, timestamp, rightHandIndex, jointsPos [rightHandIndex]);
 					gestureData.progress = 0f;
@@ -1153,8 +1146,8 @@ public class KinectGestures
 
 				if (jointsTracked [leftHandIndex] && jointsTracked [rightElbowIndex] && jointsTracked [leftShoulderIndex] &&
 					(jointsPos [leftHandIndex].y - jointsPos [rightElbowIndex].y) > 0f &&
-					(jointsPos [leftHandIndex].z - jointsPos [leftShoulderIndex].z) < 0.1f) 
-				{
+					(jointsPos [leftHandIndex].z - jointsPos [leftShoulderIndex].z) < 0.1f) {
+
 					SetGestureJoint (ref gestureData, timestamp, leftHandIndex, jointsPos [leftHandIndex]);
 					gestureData.progress = 0f;
 				}
@@ -1202,10 +1195,8 @@ public class KinectGestures
 
 					bool isInPose =jointsTracked [leftElbowIndex] && jointsTracked [leftShoulderIndex] 
 					&&jointsTracked [rightElbowIndex] && jointsTracked [rightShoulderIndex]   
-
 					&&(jointsPos [leftShoulderIndex].y -jointsPos[leftElbowIndex].y)< 0.1f
-					&&(jointsPos [rightShoulderIndex].y - jointsPos[rightElbowIndex].y)< 0.1f
-					; 
+					&&(jointsPos [rightShoulderIndex].y - jointsPos[rightElbowIndex].y)< 0.1f; 
 					if (isInPose) {
 						Vector3 jointPos = jointsPos [gestureData.joint];
 						CheckPoseComplete (ref gestureData, timestamp, jointPos, isInPose, 0f);
@@ -1361,16 +1352,16 @@ public class KinectGestures
 			switch (gestureData.state) {
 			case 0:  // gesture detection - phase 1
 				if (jointsTracked [hipCenterIndex] &&
-				    (jointsPos [hipCenterIndex].y <= 0.5f)){
+				    (jointsPos [hipCenterIndex].y <= 0.6f)){
 					SetGestureJoint (ref gestureData, timestamp, hipCenterIndex, jointsPos [hipCenterIndex]);
 					gestureData.progress = 0f;
-					//Debug.Log("Squat Released");
+					Debug.Log("Squat Released");
 				}
 				break;
 
 			case 1:  // gesture phase 2 = complete
 				
-				if ((timestamp - gestureData.timestamp) < 3f) {
+				if ((timestamp - gestureData.timestamp) < 1.5f) {
 					bool isInPose = jointsTracked [hipCenterIndex] 
 					&& (gestureData.jointPos.y - jointsPos [hipCenterIndex].y) < -0.15f 
 					&& Mathf.Abs (jointsPos [hipCenterIndex].x - gestureData.jointPos.x) < 0.2f;

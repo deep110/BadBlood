@@ -51,17 +51,16 @@ public class BattleController : MonoBehaviour {
 			if (player1.healthPercent <= 0) {
 				banner.showYouLose ();
 				battleEnded = true;
-
 			} else if (player2.healthPercent <= 0) {
 				banner.showYouWin ();
 				battleEnded = true;
 			}
 		}
-		/*
-		if (battleEnded){
+
+		/*if (battleEnded){
 			Application.LoadLevel("StartScene");
-		}
-		*/
+		}*/
+
 
 	}
 }
