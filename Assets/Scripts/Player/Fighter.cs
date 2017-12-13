@@ -37,7 +37,6 @@ public class Fighter : MonoBehaviour {
 
 
 	public void UpdateHumanInput (){
-		Debug.Log ("player"+health);
 		if (countF > 0) {
 			animator.SetBool ("Walk", true);
 			countF--;
@@ -142,6 +141,7 @@ public class Fighter : MonoBehaviour {
 		if (enable) {
 			if (player == PlayerType.HUMAN){
 				UpdateHumanInput ();
+				KeyboardInterrupt();
 			}else{
 				UpdateAiInput();
 			}
@@ -216,7 +216,7 @@ public class Fighter : MonoBehaviour {
 		}
 	}
 	//Keyboard inputs
-	/*public void KeyboardInterrupt (){
+	public void KeyboardInterrupt (){
 		if (Input.GetAxis ("Horizontal") > 0.1) {
 			animator.SetBool ("Walk", true);
 		} else {
@@ -249,5 +249,5 @@ public class Fighter : MonoBehaviour {
 			animator.SetTrigger("KickRight");
 		}
 		
-	}*/
+	}
 }

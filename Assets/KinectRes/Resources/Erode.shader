@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced 'texRECT' with 'tex2D'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced 'texRECT' with 'tex2D'
 
 Shader "Custom/Erode" {
     Properties
@@ -31,7 +33,7 @@ Shader "Custom/Erode" {
             v2f vert (appdata_base v)
             {
                 v2f o;
-                o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+                o.pos = UnityObjectToClipPos (v.vertex);
                 o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);
                 return o;
             }
